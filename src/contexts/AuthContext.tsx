@@ -1,8 +1,12 @@
 
-import React, { createContext, useContext, useState } from "react";
-import { User, UserRole } from "@/lib/types";
-import { adminUser, currentUser } from "@/lib/data";
-import { toast } from "sonner";
+import React, { createContext, useContext, useState, ReactNode } from "react";
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'user' | 'admin';
+}
 
 interface AuthContextType {
   user: User | null;
@@ -10,49 +14,48 @@ interface AuthContextType {
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  switchRole: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(currentUser);
+// Demo users for development
+const DEMO_ADMIN: User = {
+  id: '1',
+  name: 'Admin User',
+  email: 'admin@example.com',
+  role: 'admin',
+};
+
+const DEMO_USER: User = {
+  id: '2',
+  name: 'Regular User',
+  email: 'user@example.com',
+  role: 'user',
+};
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
 
   const isAuthenticated = user !== null;
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === 'admin';
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    if (email === "admin@example.com" && password === "password") {
-      setUser(adminUser);
-      toast.success("Logged in as Admin");
+    // This is a simplified mock authentication
+    // In a real app, you'd validate credentials against your backend
+    
+    if (email === 'admin@example.com' && password === 'admin123') {
+      setUser(DEMO_ADMIN);
       return true;
-    } else if (email === "user@example.com" && password === "password") {
-      setUser(currentUser);
-      toast.success("Logged in as User");
+    } else if (email === 'user@example.com' && password === 'user123') {
+      setUser(DEMO_USER);
       return true;
     }
-
-    toast.error("Invalid credentials");
+    
     return false;
   };
 
   const logout = () => {
     setUser(null);
-    toast.success("Logged out successfully");
-  };
-
-  // This is just for demo purposes to easily switch between roles
-  const switchRole = () => {
-    if (isAdmin) {
-      setUser(currentUser);
-      toast.success("Switched to User role");
-    } else {
-      setUser(adminUser);
-      toast.success("Switched to Admin role");
-    }
   };
 
   return (
@@ -63,7 +66,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAdmin,
         login,
         logout,
-        switchRole
       }}
     >
       {children}
