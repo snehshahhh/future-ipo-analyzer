@@ -3,93 +3,188 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Track the Hottest <span className="text-gradient">IPOs</span> of 2025
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-ipo-blue/20 to-transparent rounded-full blur-3xl animate-float"></div>
+      <div className="absolute top-1/4 right-0 w-80 h-80 bg-gradient-to-bl from-ipo-purple/20 to-transparent rounded-full blur-3xl animate-float animation-delay-200"></div>
+      <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-to-tr from-ipo-pink/20 to-transparent rounded-full blur-3xl animate-float animation-delay-400"></div>
+      
+      <section className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+        {/* Hero Section */}
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-ipo-blue/10 to-ipo-purple/10 border border-ipo-blue/20 mb-8 animate-pulse-glow">
+            <span className="text-sm font-medium text-gradient">🚀 Track the Future of IPOs</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6 animate-slide-up">
+            Discover the Next
+            <br />
+            <span className="text-gradient">Big Investment</span>
+            <br />
+            Opportunity
           </h1>
-          <p className="text-lg text-muted-foreground">
-            Stay informed about upcoming initial public offerings, analyze performance metrics,
-            and make data-driven investment decisions.
+          
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-slide-up animation-delay-200">
+            Stay ahead of the market with comprehensive IPO analysis, real-time updates, 
+            and data-driven insights. Make informed investment decisions with our advanced tracking platform.
           </p>
-          <div className="pt-4 space-x-4">
-            <Link href="/ipos" className="px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-              Browse IPOs
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up animation-delay-300">
+            <Link 
+              href="/ipos" 
+              className="group relative px-8 py-4 bg-gradient-to-r from-ipo-blue to-ipo-purple rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-glow"
+            >
+              <span className="relative z-10">Explore IPOs</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-ipo-purple to-ipo-pink rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
-            <Link href="/login" className="px-6 py-3 bg-muted text-muted-foreground rounded-md hover:bg-muted/70 transition-colors">
-              Log In
+            
+            <Link 
+              href="/login" 
+              className="px-8 py-4 glassmorphism rounded-xl font-semibold hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300 transform hover:scale-105"
+            >
+              Get Started Free
             </Link>
           </div>
         </div>
 
-        <div className="rounded-xl overflow-hidden shadow-xl animate-fade-in">
-          <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-6 md:p-8 rounded-xl">
-            <div className="absolute top-0 right-0 p-4 bg-black/20 rounded-bl-xl text-white">
-              Featured IPO
-            </div>
-            <h2 className="text-2xl font-bold text-white mb-2">Blue Water Logistics</h2>
-            <div className="grid grid-cols-2 gap-4 text-white/90">
-              <div>
-                <p className="text-xs uppercase">Open Date</p>
-                <p className="font-medium">27 May 2025</p>
+        {/* Featured IPO Card */}
+        <div className="max-w-4xl mx-auto mb-20 animate-fade-in animation-delay-400">
+          <div className="glassmorphism rounded-2xl p-8 md:p-12 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-ipo-emerald/20 to-transparent rounded-full blur-2xl"></div>
+            
+            <div className="relative z-10">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <div className="inline-block px-3 py-1 bg-gradient-to-r from-ipo-emerald to-ipo-cyan rounded-full text-white text-xs font-semibold mb-3">
+                    🔥 Hot IPO
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gradient-secondary mb-2">
+                    Blue Water Logistics
+                  </h2>
+                  <p className="text-muted-foreground">SME • Logistics & Supply Chain</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl md:text-3xl font-bold text-gradient">8.5/10</div>
+                  <div className="text-sm text-muted-foreground">Overall Score</div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs uppercase">Close Date</p>
-                <p className="font-medium">29 May 2025</p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                <div className="text-center p-4 rounded-xl bg-gradient-to-b from-ipo-blue/10 to-transparent">
+                  <div className="text-xs uppercase text-muted-foreground mb-1">Open Date</div>
+                  <div className="font-semibold">27 May 2025</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-gradient-to-b from-ipo-purple/10 to-transparent">
+                  <div className="text-xs uppercase text-muted-foreground mb-1">Close Date</div>
+                  <div className="font-semibold">29 May 2025</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-gradient-to-b from-ipo-pink/10 to-transparent">
+                  <div className="text-xs uppercase text-muted-foreground mb-1">Price Band</div>
+                  <div className="font-semibold">₹132 - ₹135</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-gradient-to-b from-ipo-cyan/10 to-transparent">
+                  <div className="text-xs uppercase text-muted-foreground mb-1">Issue Size</div>
+                  <div className="font-semibold">₹40.50 Cr.</div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs uppercase">Price Band</p>
-                <p className="font-medium">₹132 - ₹135</p>
+              
+              <div className="flex justify-center">
+                <Link 
+                  href="/ipos/682cb19358f15cc8daa65481" 
+                  className="px-6 py-3 bg-gradient-to-r from-ipo-cyan to-ipo-blue rounded-lg text-white font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                >
+                  View Complete Analysis →
+                </Link>
               </div>
-              <div>
-                <p className="text-xs uppercase">Issue Size</p>
-                <p className="font-medium">₹40.50 Cr.</p>
-              </div>
-            </div>
-            <div className="mt-6">
-              <Link href="/ipos/682cb19358f15cc8daa65481" className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-white/90 transition-colors text-sm font-medium">
-                View Details
-              </Link>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="mt-24 text-center">
-        <h2 className="text-3xl font-bold mb-6">Why Use IPO Tracker?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Comprehensive Data</h3>
-            <p className="text-muted-foreground">Access detailed information about upcoming IPOs including financials, key dates, and performance metrics.</p>
-          </div>
+        
+        {/* Features Section */}
+        <div className="mb-20 animate-fade-in animation-delay-500">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Why Choose <span className="text-gradient">IPO Tracker</span>?
+          </h2>
+          <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+            Advanced analytics and comprehensive data to help you make smarter investment decisions
+          </p>
           
-          <div className="p-6 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-              </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="ipo-card p-8 glassmorphism rounded-2xl text-center group">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-ipo-blue to-ipo-purple flex items-center justify-center text-white text-2xl animate-pulse-glow">
+                📊
+              </div>
+              <h3 className="text-xl font-bold mb-4 group-hover:text-gradient transition-all duration-300">
+                Comprehensive Analysis
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Deep dive into fundamentals, risk assessment, performance metrics, and market timing analysis for every IPO.
+              </p>
             </div>
-            <h3 className="text-xl font-bold mb-2">Market Analysis</h3>
-            <p className="text-muted-foreground">Get insights on market trends, sector performance, and expert recommendations on upcoming offerings.</p>
-          </div>
-          
-          <div className="p-6 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            
+            <div className="ipo-card p-8 glassmorphism rounded-2xl text-center group">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-ipo-purple to-ipo-pink flex items-center justify-center text-white text-2xl animate-pulse-glow animation-delay-100">
+                ⚡
+              </div>
+              <h3 className="text-xl font-bold mb-4 group-hover:text-gradient transition-all duration-300">
+                Real-Time Updates
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Stay informed with instant notifications about IPO openings, closings, allotments, and listing updates.
+              </p>
             </div>
-            <h3 className="text-xl font-bold mb-2">Real-Time Updates</h3>
-            <p className="text-muted-foreground">Stay informed with timely notifications about IPO openings, closings, and allotment status.</p>
+            
+            <div className="ipo-card p-8 glassmorphism rounded-2xl text-center group">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-ipo-pink to-ipo-cyan flex items-center justify-center text-white text-2xl animate-pulse-glow animation-delay-200">
+                🎯
+              </div>
+              <h3 className="text-xl font-bold mb-4 group-hover:text-gradient transition-all duration-300">
+                Smart Recommendations
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                AI-powered investment recommendations based on comprehensive analysis and market trends.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 animate-fade-in animation-delay-600">
+          <div className="text-center p-6 glassmorphism rounded-xl">
+            <div className="text-3xl font-bold text-gradient mb-2">150+</div>
+            <div className="text-sm text-muted-foreground">IPOs Tracked</div>
+          </div>
+          <div className="text-center p-6 glassmorphism rounded-xl">
+            <div className="text-3xl font-bold text-gradient mb-2">₹50K Cr</div>
+            <div className="text-sm text-muted-foreground">Total Issue Size</div>
+          </div>
+          <div className="text-center p-6 glassmorphism rounded-xl">
+            <div className="text-3xl font-bold text-gradient mb-2">95%</div>
+            <div className="text-sm text-muted-foreground">Accuracy Rate</div>
+          </div>
+          <div className="text-center p-6 glassmorphism rounded-xl">
+            <div className="text-3xl font-bold text-gradient mb-2">10K+</div>
+            <div className="text-sm text-muted-foreground">Active Users</div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center glassmorphism rounded-2xl p-12 animate-fade-in animation-delay-700">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Start <span className="text-gradient">Investing Smart</span>?
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Join thousands of investors who trust IPO Tracker for their investment decisions
+          </p>
+          <Link 
+            href="/ipos" 
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-ipo-blue via-ipo-purple to-ipo-pink rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-glow"
+          >
+            Explore All IPOs →
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
