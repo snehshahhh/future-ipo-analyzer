@@ -20,8 +20,7 @@ export default function AdminDashboard() {
     
     async function fetchIpos() {
       try {
-        // Using the sample endpoint for development
-        const response = await fetch('/api/ipo/sample');
+        const response = await fetch('/api/ipo');
         const result = await response.json();
         
         if (result.success) {
@@ -45,7 +44,7 @@ export default function AdminDashboard() {
           <p className="mb-4">Please log in to access the admin dashboard.</p>
           <button 
             onClick={() => router.push('/login')} 
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-ipo-blue text-white rounded hover:bg-ipo-purple transition-colors"
           >
             Go to Login
           </button>
@@ -62,7 +61,7 @@ export default function AdminDashboard() {
           <p className="mb-4">You do not have permission to access this page.</p>
           <button 
             onClick={() => router.push('/')} 
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-ipo-blue text-white rounded hover:bg-ipo-purple transition-colors"
           >
             Go to Homepage
           </button>
@@ -73,11 +72,28 @@ export default function AdminDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-gradient">Admin Dashboard - IPO Management</h1>
+      <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-ipo-blue to-ipo-purple bg-clip-text text-transparent">
+        Admin Dashboard - IPO Management
+      </h1>
+      
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-gradient-to-r from-ipo-blue to-ipo-purple p-6 rounded-xl text-white">
+          <h3 className="text-lg font-medium">Total IPOs</h3>
+          <p className="text-3xl font-bold">{ipos.length}</p>
+        </div>
+        <div className="bg-gradient-to-r from-ipo-emerald to-ipo-cyan p-6 rounded-xl text-white">
+          <h3 className="text-lg font-medium">Mainboard IPOs</h3>
+          <p className="text-3xl font-bold">{ipos.filter(ipo => ipo.ipo_type === 'Mainboard').length}</p>
+        </div>
+        <div className="bg-gradient-to-r from-ipo-amber to-ipo-rose p-6 rounded-xl text-white">
+          <h3 className="text-lg font-medium">SME IPOs</h3>
+          <p className="text-3xl font-bold">{ipos.filter(ipo => ipo.ipo_type === 'SME').length}</p>
+        </div>
+      </div>
       
       {loading ? (
         <div className="w-full flex justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-ipo-blue"></div>
         </div>
       ) : (
         <div className="bg-card rounded-xl shadow-md overflow-hidden">
@@ -89,6 +105,8 @@ export default function AdminDashboard() {
                   <th className="px-6 py-4 font-medium">IPO Name</th>
                   <th className="px-6 py-4 font-medium">Open Date</th>
                   <th className="px-6 py-4 font-medium">Closing Date</th>
+                  <th className="px-6 py-4 font-medium">Type</th>
+                  <th className="px-6 py-4 font-medium">Size</th>
                   <th className="px-6 py-4 font-medium">Actions</th>
                 </tr>
               </thead>
@@ -99,19 +117,29 @@ export default function AdminDashboard() {
                       {ipo._id}
                     </td>
                     <td className="px-6 py-4 font-medium">
-                      {ipo["Upcoming IPO 2025"]}
+                      {ipo.upcoming_ipo_2025}
                     </td>
-                    <td className="px-6 py-4">{ipo["Open Date"]}</td>
-                    <td className="px-6 py-4">{ipo["Closing Date"]}</td>
+                    <td className="px-6 py-4">{ipo.open_date}</td>
+                    <td className="px-6 py-4">{ipo.closing_date}</td>
+                    <td className="px-6 py-4">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        ipo.ipo_type === 'Mainboard' 
+                          ? 'bg-ipo-blue/20 text-ipo-blue' 
+                          : 'bg-ipo-emerald/20 text-ipo-emerald'
+                      }`}>
+                        {ipo.ipo_type}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">{ipo.ipo_size}</td>
                     <td className="px-6 py-4">
                       <button 
-                        onClick={() => router.push(`/admin/ipos/${ipo._id}`)}
-                        className="text-blue-600 dark:text-blue-400 hover:underline mr-4"
+                        onClick={() => router.push(`/ipos/${ipo._id}`)}
+                        className="text-ipo-blue hover:underline mr-4"
                       >
                         View
                       </button>
                       <button 
-                        className="text-emerald-600 dark:text-emerald-400 hover:underline mr-4"
+                        className="text-ipo-emerald hover:underline mr-4"
                       >
                         Edit
                       </button>

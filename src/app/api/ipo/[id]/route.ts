@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongo';
-import Ipo from '@/models/Ipo';
+import Ipo, { Analysis } from '@/models/Ipo';
 
 export async function GET(
   request: Request,
@@ -19,8 +19,16 @@ export async function GET(
         { status: 404 }
       );
     }
+
+    // Try to fetch analysis data
+    const analysis = await Analysis.findOne({ ipo_table_id: id });
     
-    return NextResponse.json({ success: true, data: ipo });
+    const responseData = {
+      ipo,
+      analysis: analysis || null
+    };
+    
+    return NextResponse.json({ success: true, data: responseData });
   } catch (error) {
     console.error('Error fetching IPO details:', error);
     return NextResponse.json(
